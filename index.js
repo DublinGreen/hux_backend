@@ -9,6 +9,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const config = require('./config');
 
 const app = express();
+const api = config.api;
 const port = config.port;
 
 // Swagger definition
@@ -20,7 +21,7 @@ info: {
     description: 'Documentation for Hux API',
 },
 servers: [{
-    url: `http://localhost:${port}`,
+    url: `${api}${port}`,
     description: 'Local server',
 }],
 };
@@ -67,7 +68,6 @@ const secretKey = config.secretKey;
 const authenticateJWT = (req, res, next) => {
     let cleanToken = req.headers.authorization;
     const token = cleanToken.slice(7);
-    console.log(token);
 
     if (token) {
         jwt.verify(token, secretKey, (err, decoded) => {
@@ -138,7 +138,8 @@ app.post('/api/logout', (req, res) => {
     console.log(token);
 
     if (token) {
-        jwt.destroy(token);
+        token = null;
+        // jwt.destroy(token); This doesn't work as expected
         res.send('Logout successful!');
     } else {
         res.sendStatus(401);
