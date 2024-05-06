@@ -1,12 +1,12 @@
 let config = {};
-config.port = 3000;
+config.port = 3100;
 
 config.api = "http://localhost:";
 
 config.host = "localhost";
 config.user = "root";
 config.password = "";
-config.database =  "hux_test";
+config.database =  "hux";
 
 config.secretKey = "your_secret_key";
 
