@@ -6,7 +6,7 @@ config.api = "http://localhost:";
 config.host = "localhost";
 config.user = "root";
 config.password = "";
-config.database =  "hux";
+config.database =  "hux_test";
 
 config.secretKey = "your_secret_key";
 

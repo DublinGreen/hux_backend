@@ -1,6 +1,8 @@
 # hux_backend
 
 # Installation
+    Import the hux.sql into the database. Set DB config in config.js to match your environment. 
+
     Run npm install
     Run npm start
 
