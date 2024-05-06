@@ -4,18 +4,20 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql2');
 
+const config = require('./config');
+
 const app = express();
-const port = 3000;
+const port = config.port;
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
 // MySQL database connection configuration
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'hux'
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database
 });
 
 // Connect to MySQL database
@@ -28,7 +30,7 @@ db.connect(err => {
 });
 
 // Secret key for JWT
-const secretKey = 'your_secret_key';
+const secretKey = config.secretKey;
 
 // Middleware for JWT authentication
 const authenticateJWT = (req, res, next) => {
