@@ -102,7 +102,16 @@ app.post('/api/login', (req, res) => {
 // Endpoint for user logout
 app.post('/api/logout', (req, res) => {
     // Perform logout logic here
-    res.send('Logout successful!'); // Placeholder response
+    let cleanToken = req.headers.authorization;
+    const token = cleanToken.slice(7);
+    console.log(token);
+
+    if (token) {
+        jwt.destroy(token);
+        res.send('Logout successful!');
+    } else {
+        res.sendStatus(401);
+    }
 });
 
 // Endpoint to create a new contact
