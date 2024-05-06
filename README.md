@@ -11,7 +11,11 @@
     Run nodemon start
 
 # Unit Testing
-    Run npm test    
+    Run npm test  
+
+
+# Swagger Documentation
+    http://[api_url]:[port]/api-docs/
 
 # Task
 Create a simple web application that allows users to save contact information. Your application
