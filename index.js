@@ -13,31 +13,31 @@ const port = config.port;
 
 // Swagger definition
 const swaggerDefinition = {
-    openapi: '3.0.0',
-    info: {
-      title: 'Sample API',
-      version: '1.0.0',
-      description: 'Documentation for Sample API',
-    },
-    servers: [{
-      url: `http://localhost:${port}`,
-      description: 'Local server',
-    }],
-  };
+openapi: '3.0.0',
+info: {
+    title: 'Hux API',
+    version: '1.0.0',
+    description: 'Documentation for Hux API',
+},
+servers: [{
+    url: `http://localhost:${port}`,
+    description: 'Local server',
+}],
+};
   
-  // Options for the swagger jsdoc
-  const options = {
-    swaggerDefinition,
-    // Path to the API docs
-    apis: ['./routes/*.js'],  // Replace with the path to your route files
-  };
+// Options for the swagger jsdoc
+const options = {
+swaggerDefinition,
+// Path to the API docs
+apis: ['./routes/*.js'],  // Replace with the path to your route files
+};
   
-  // Initialize swagger-jsdoc
-  const swaggerSpec = swaggerJSDoc(options);
-  
-  // Serve swagger docs
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  
+// Initialize swagger-jsdoc
+const swaggerSpec = swaggerJSDoc(options);
+
+// Serve swagger docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 
 // Middleware to parse JSON request bodies
@@ -145,7 +145,33 @@ app.post('/api/logout', (req, res) => {
     }
 });
 
+
 // Endpoint to create a new contact
+/**
+ * @swagger
+ * /api/contacts:
+ *   get:
+ *     summary: Returns a list of contacts
+ *     description: Returns a list of all contacts.
+ *     responses:
+ *       200:
+ *         description: A list of contacts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   firstName:
+ *                     type: string
+ *                   lastName:
+ *                     type: string
+ *                   phoneNumber:
+ *                     type: string
+ */
 app.post('/api/contacts', authenticateJWT, validateContact, (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
