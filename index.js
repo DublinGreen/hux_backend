@@ -3,11 +3,42 @@ const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql2');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 const config = require('./config');
 
 const app = express();
 const port = config.port;
+
+// Swagger definition
+const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+      title: 'Sample API',
+      version: '1.0.0',
+      description: 'Documentation for Sample API',
+    },
+    servers: [{
+      url: `http://localhost:${port}`,
+      description: 'Local server',
+    }],
+  };
+  
+  // Options for the swagger jsdoc
+  const options = {
+    swaggerDefinition,
+    // Path to the API docs
+    apis: ['./routes/*.js'],  // Replace with the path to your route files
+  };
+  
+  // Initialize swagger-jsdoc
+  const swaggerSpec = swaggerJSDoc(options);
+  
+  // Serve swagger docs
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  
+
 
 // Middleware to parse JSON request bodies
 app.use(express.json());

@@ -8,6 +8,9 @@
     Run npm install -g nodemon
     Run nodemon start
 
+# Unit Testing
+    Run npm test    
+
 # Task
 Create a simple web application that allows users to save contact information. Your application
 should be divided into a backend RESTful API and a frontend that makes API calls to the
